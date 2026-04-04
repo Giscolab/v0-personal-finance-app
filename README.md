@@ -1,252 +1,169 @@
-# 💰 Personal Finance Desktop App
+# 💰 Application de Gestion Financière Personnelle
 
-![build](https://img.shields.io/badge/build-passing-brightgreen) ![license](https://img.shields.io/github/license/Giscolab/v0-personal-finance-app) ![platform](https://img.shields.io/badge/platform-tauri%20%7C%20next.js-blue) 
+![build](https://img.shields.io/badge/build-passing-brightgreen)
+![license](https://img.shields.io/github/license/Giscolab/v0-personal-finance-app)
+![plateforme](https://img.shields.io/badge/plateforme-next.js%20%7C%20tauri-blue)
 
-Modern, secure, and local-first desktop application to analyze and manage your personal finances. Built with React, TypeScript, Next.js, and Tauri, this application helps you visualize, forecast and control your budgets – 100% private, your data never leaves your machine!  
+Une application desktop moderne et sécurisée pour la gestion de vos finances personnelles, développée en React, Next.js, TypeScript et Tauri. Vos données restent privées, stockées et chiffrées localement.
 
 ---
 
-## 📚 Table of Contents
+## 📚 Sommaire
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
+- [Fonctionnalités](#fonctionnalités)
+- [Technologies](#technologies)
+- [Structure du projet](#structure-du-projet)
 - [Installation](#installation)
-- [Usage Guide](#usage-guide)
-- [Security](#security)
-- [Customization](#customization)
-- [Contributing](#contributing)
+- [Guide d’utilisation](#guide-dutilisation)
+- [Sécurité](#sécurité)
+- [Contribution](#contribution)
 - [Support](#support)
 
 ---
 
-## 🌟 Features
+## 🌟 Fonctionnalités
 
-### 📊 Advanced Dashboard
-- Sophisticated financial indicators: ITT (Cash Flow Index), burn rate, runway, volatility, drawdown
-- OHLC candlestick charts: Japanese-style with volumes
-- Calendar heatmaps: yearly spend patterns
-- Real-time metrics: balance, income, expenses, savings with trend monitoring
-
-### 💳 Transaction Management
-- Intuitive CRUD: add, edit, delete transactions
-- Advanced filters: date, amount, category, account
-- Smart search: free-text search in descriptions
-- Automatic categorization: intelligent classification
-- Visual cues: color-coded incomes/expenses
-
-### 📈 Budgets & Tracking
-- Custom monthly budgets by category
-- Progress bars with overrun alerts
-- Comparative analysis: budget vs. actual
-- Intelligent notifications: configurable thresholds
-
-### 🔮 Forecasting
-- Predictive analytics: historical algorithms
-- Scenario modeling: optimistic, pessimistic, realistic
-- Trend detection: identify spending patterns
-- Long-term planning: 6-12 month projections
-
-### 📥 Data Import
-- Multiple formats: CSV, OFX, QIF, MT940
-- Intuitive drag & drop UI
-- Duplicate detection, robust data validation
-
-### 🔒 Security & Privacy
-- Lock screen: password at startup
-- Auto-lock after inactivity
-- Local storage only: no server or cloud
-- Encryption: all sensitive data protected
+- Tableau de bord avancé avec indicateurs financiers
+- Gestion intuitive des transactions : ajout, édition, suppression, filtrage, recherche
+- Budgets mensuels et suivi dynamique
+- Import de données multi-formats (CSV, OFX, QIF, MT940)
+- Prévisions et analyses visuelles (graphiques, heatmaps)
+- Sécurité renforcée : chiffrement local, verrouillage, fonctionnement offline
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technologies / dépendances principales
 
-- **Frontend**: React 18+, Next.js 14+, TypeScript, Tailwind CSS v4, [Shadcn/ui](https://ui.shadcn.com/), [Lucide React](https://lucide.dev/)
-- **Backend**: [Tauri](https://tauri.app/) (Rust), SQLite local DB (encrypted with SQLCipher)
-- **Visualization**: [Apache ECharts](https://echarts.apache.org/), [Recharts](https://recharts.org/en-US/)
-- **Tooling**: ESLint, Prettier, Cargo, strict TypeScript, pnpm
-- **Other**: [Radix UI primitives](https://www.radix-ui.com/), [date-fns](https://date-fns.org/)
+- **React** (`^19`)
+- **Next.js** (`14.2.25`)
+- **TypeScript** (`^5` - devDependency)
+- **Tailwind CSS** (`^4.1.9`)
+- **Radix UI** (collection de composants avancés UI : `@radix-ui/*`)
+- **Lucide React** (icônes)
+- **date-fns** (gestion de dates)
+- **Recharts** et **ECharts** (visualisation de données)
+- **PostCSS**, **autoprefixer**, **clsx** (outils CSS)
+- **Zod**, **react-hook-form**, **@hookform/resolvers** (formulaires et validation)
+- **ESLint** (linting, devDependency)
+- **Prettier** (à ajouter si besoin)
+- **pnpm** (gestionnaire recommandé mais compatible npm/yarn)
+
+> **Note ⚡** Le backend Tauri (Rust/SQLCipher) doit être installé à part, il ne figure pas dans ce package.json frontend.
 
 ---
 
-## 📁 Project Structure
+## 📁 Structure du projet (extrait)
 
 ```text
-├── app/                # Pages & routes (App Router)
-│   ├── layout.tsx
-│   ├── client-layout.tsx
-│   ├── page.tsx
-│   ├── transactions/
-│   │   ├── page.tsx
-│   │   └── loading.tsx
-│   ├── budgets/
-│   │   ├── page.tsx
-│   │   └── loading.tsx
-│   ├── forecasting/
-│   │   ├── page.tsx
-│   │   └── loading.tsx
-│   ├── import/
-│   │   └── page.tsx
-│   └── globals.css
-├── components/         # Reusable React components
-│   ├── ui/
-│   ├── lock-screen.tsx
-│   ├── sidebar-navigation.tsx
-│   ├── chart-line.tsx
-│   ├── candlestick-chart.tsx
-│   ├── calendar-heatmap.tsx
-│   ├── financial-indicators.tsx
-│   └── theme-provider.tsx
-├── hooks/              # Custom React hooks
-│   ├── use-mobile.tsx
-│   └── use-toast.ts
-├── lib/                # Utilities & helpers
-│   └── utils.ts
-├── types/              # TypeScript types
-│   └── financial.ts
-├── src-tauri/          # Tauri (Rust backend)
-│   ├── Cargo.toml
-│   ├── src/
-│   └── tauri.conf.json
-└── assets/
-    └── icons/
+├── app/                # Pages Next.js
+├── components/         # Composants React (UI, charts…)
+├── hooks/              # Hooks personnalisés
+├── lib/                # Helpers/utilitaires
+├── types/              # Types TypeScript
+├── src-tauri/          # Backend Rust (Tauri)
+├── package.json
+├── tailwind.config.js
+└── ...
 ```
 
 ---
 
 ## 🚀 Installation
 
-### 1. Pre-requisites
+### 1. Prérequis
 
-- **Rust** 1.70+ (with Cargo)
-- **Node.js** 18+
-- **pnpm** (or npm/yarn)
-- **Tauri CLI**:  
-  ```sh
-  cargo install tauri-cli
-  ```
+- [Node.js 18+](https://nodejs.org/)
+- [pnpm](https://pnpm.io/) (ou `npm`/`yarn`)
+- [Rust 1.70+](https://www.rust-lang.org/tools/install) **et** [Tauri CLI](https://tauri.app/) pour la partie desktop
 
-### 2. Setup
+### 2. Clonage et dépendances
 
-```sh
-# Clone the repository
+Sous PowerShell :
+
+```powershell
 git clone https://github.com/Giscolab/v0-personal-finance-app.git
 cd v0-personal-finance-app
-
-# Install frontend dependencies
 pnpm install
-
-# (Optional) Install Tauri CLI if not done above
-cargo install tauri-cli
+```
+*Si vous utilisez npm :*  
+```powershell
+npm install
 ```
 
-### 3. Development
+### 3. Lancer l’application en développement
 
-```sh
-# Launch the app in dev mode (Next.js + Tauri)
+Si vous travaillez uniquement sur le frontend Next.js :
+```powershell
+pnpm dev
+# ou
+npm run dev
+```
+
+Pour lancer l’application desktop (nécessite Tauri CLI et Rust) :
+```powershell
 pnpm tauri dev
+# ou
+npm run tauri dev
 ```
 
-### 4. Production Build
+### 4. Construire pour la production
 
-```sh
+```powershell
+pnpm build
+# ou
+npm run build
+```
+Pour le build desktop (Windows .exe, .msi, etc.) :
+```powershell
 pnpm tauri build
-# Artifacts found in src-tauri/target/release/
 ```
 
-#### For Windows: `.exe` and `.msi`  
-#### For macOS: `.app` and `.dmg`  
-#### For Linux: `.AppImage` and `.deb`
+---
+
+## 📖 Guide d’utilisation
+
+- Accédez à l’interface via le navigateur ou l’application desktop.
+- Ajoutez vos transactions et configurez vos budgets.
+- Importez vos dépenses (CSV, etc.) dans l’interface prévue.
+- Explorez les analyses et visualisations offertes.
+- Activez le verrouillage automatique et configurez un mot de passe fort.
 
 ---
 
-## 📖 Usage Guide
+## 🔒 Sécurité
 
-### Lock Screen
-- App auto-locks after 15 min inactivity
-- Use master password to unlock
-- "Remember me" option available
-
-### Dashboard
-- Key metrics at a glance
-- Interactive charts & indicators
-- Recent transactions overview
-
-### Transaction Management
-- Manual add (+), edit, and filter actions
-- Export to CSV
-
-### Budgets
-- Create/check monthly budgets
-- Real-time progress and alerts
-- Budget history
-
-### Forecasting
-- Switch between predictive algorithms & scenarios
-- Plan future needs
+- Toutes les données sont stockées localement, chiffrées (côté Rust avec SQLCipher et Tauri).
+- Pas d’envoi de données en ligne, pas de tracking.
+- Soutien au verrouillage automatique et mot de passe maître.
 
 ---
 
-## 🔧 Customization
+## 🤝 Contribution
 
-- **Themes**: Light/dark based on system preference
-- **Categories**: Create/customize your own categories and colors
-- **Indicators**: Set threshold levels for alerts (e.g. ITT, burn rate, volatility)
-
----
-
-## 🔒 Security
-
-### Architecture
-
-- **Encrypted vault**: SQLCipher (AES-256-GCM)
-- **Key derivation**: PBKDF2, 200k iterations
-- **Master key**: Derived (never stored in clear)
-- **Full offline**: No network, local-only
-- **Sandboxing**:  Tauri isolation between frontend & backend
-- **No telemetry**: No tracking or analytics
-
-### Recommendations
-
-- Use a strong master password (≥12 chars)
-- Back up your encrypted vault regularly
-- Keep the app updated for security fixes
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Install Rust & Node.js
-3. Create a feature branch  
-   ```sh
-   git checkout -b feature/awesome-feature
+1. Forkez ce dépôt.
+2. Créez une nouvelle branche avec :
+   ```powershell
+   git checkout -b feature/ma-fonctionnalite
    ```
-4. Dev: `pnpm tauri dev`
-5. Test: `cargo test`, `pnpm test`
-6. Commit & push  
-   ```sh
-   git commit -am "Add awesome feature"
-   git push origin feature/awesome-feature
+3. Développez localement et testez vos changements.
+4. Validez :
+   ```powershell
+   git commit -am "Ajout : ma nouvelle fonctionnalité"
+   git push origin feature/ma-fonctionnalite
    ```
-7. Open a Pull Request
+5. Créez une Pull Request.
 
-**Code style:**  
-- Rust: `cargo fmt`, `cargo clippy`  
-- TypeScript: strict types everywhere  
-- ESLint must pass  
-- Add unit tests (both Rust + React)  
-- Security review on critical changes
+**Normes :**  
+- Respectez la configuration ESLint/TypeScript stricte.
+- Ajoutez des tests si pertinent.
 
 ---
 
 ## 📞 Support
 
-- 💬 Issues: [GitHub Issues](https://github.com/Giscolab/v0-personal-finance-app/issues)
-- 📖 Docs: browse code & comments
-- 🔒 Security: report vulnerabilities to security@finance-app.com
+- Pour toute question, utilisez les [issues GitHub](https://github.com/Giscolab/v0-personal-finance-app/issues).
+- Consultez le code et les commentaires pour plus d’informations.
 
 ---
 
-**Made with ❤️ for modern, secure & private finance management.**
+**Développé avec ❤️ par Giscolab – pour une gestion financière moderne, locale et sécurisée.**
