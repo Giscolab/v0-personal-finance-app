@@ -1,263 +1,252 @@
-# 💰 Application de Gestion Financière Personnelle
+# 💰 Personal Finance Desktop App
 
-Une application desktop moderne et sécurisée de gestion financière personnelle développée avec React et Tauri, offrant une analyse avancée de vos finances avec des visualisations sophistiquées et un système de coffre-fort chiffré.
+![build](https://img.shields.io/badge/build-passing-brightgreen) ![license](https://img.shields.io/github/license/Giscolab/v0-personal-finance-app) ![platform](https://img.shields.io/badge/platform-tauri%20%7C%20next.js-blue) 
 
-## 🌟 Fonctionnalités Principales
-
-### 📊 Tableau de Bord Avancé
-- **Indicateurs financiers sophistiqués** : ITT (Indice de Tension de Trésorerie), burn rate, runway, volatilité, drawdown
-- **Graphiques OHLC** : Analyse en bougies japonaises de votre solde quotidien avec volumes
-- **Heatmap calendaire** : Visualisation thermique de vos dépenses quotidiennes sur l'année
-- **Métriques en temps réel** : Solde, revenus, dépenses, épargne avec évolutions
-
-### 💳 Gestion des Transactions
-- **Interface intuitive** : Ajout, modification et suppression de transactions
-- **Filtrage avancé** : Par date, montant, catégorie, compte
-- **Recherche intelligente** : Recherche textuelle dans les descriptions
-- **Catégorisation automatique** : Classification intelligente des transactions
-- **Indicateurs visuels** : Codes couleur pour revenus/dépenses
-
-### 📈 Budgets et Suivi
-- **Budgets par catégorie** : Définition de limites mensuelles personnalisées
-- **Indicateurs de progression** : Barres de progression avec alertes de dépassement
-- **Analyse comparative** : Budget vs dépenses réelles
-- **Alertes intelligentes** : Notifications de dépassement avec seuils configurables
-
-### 🔮 Prévisions Financières
-- **Modèles de prévision** : Algorithmes de prédiction basés sur l'historique
-- **Scénarios multiples** : Projections optimistes, pessimistes, réalistes
-- **Analyse de tendances** : Identification des patterns de dépenses
-- **Planification à long terme** : Projections sur 6-12 mois
-
-### 📥 Import de Données
-- **Formats multiples** : Support CSV, OFX, QIF, MT940
-- **Drag & Drop** : Interface intuitive de glisser-déposer
-- **Anti-doublons** : Détection automatique des transactions dupliquées
-- **Validation robuste** : Vérification et nettoyage des données importées
-
-### 🔒 Sécurité et Confidentialité
-- **Écran de verrouillage** : Protection par mot de passe au démarrage
-- **Auto-verrouillage** : Verrouillage automatique après inactivité
-- **Stockage local** : Toutes les données restent sur votre appareil
-- **Chiffrement** : Protection des données sensibles
-- **Mode hors-ligne** : Fonctionnement 100% local, aucune connexion requise
-
-## 🛠️ Technologies Utilisées
-
-### Application Desktop
-- **Tauri** - Framework Rust pour applications desktop sécurisées
-- **React 18** - Interface utilisateur moderne et réactive
-- **TypeScript** - Typage statique pour une meilleure robustesse
-- **Tailwind CSS v4** - Framework CSS utilitaire moderne
-- **Shadcn/ui** - Composants UI élégants et accessibles
-- **Lucide React** - Icônes modernes et cohérentes
-
-### Base de Données et Sécurité
-- **SQLite** - Base de données locale embarquée
-- **SQLCipher** - Chiffrement AES-256-GCM de la base de données
-- **PBKDF2** - Dérivation de clé avec 200 000 itérations
-- **Rust** - Backend sécurisé pour les opérations critiques
-
-### Visualisation de Données
-- **Apache ECharts** - Graphiques interactifs haute performance
-- **Recharts** - Graphiques React natifs pour certains composants
-- **Charts personnalisés** - Composants de visualisation sur mesure
-
-### Développement
-- **ESLint** - Linting et qualité du code
-- **Prettier** - Formatage automatique du code
-- **Cargo** - Gestionnaire de paquets Rust
-- **TypeScript strict** - Configuration stricte pour la robustesse
-
-## 📁 Structure du Projet
-
-\`\`\`
-├── app/                          # Pages et routes (App Router)
-│   ├── layout.tsx               # Layout racine avec navigation
-│   ├── client-layout.tsx        # Layout client avec état global
-│   ├── page.tsx                 # Tableau de bord principal
-│   ├── transactions/            # Gestion des transactions
-│   │   ├── page.tsx
-│   │   └── loading.tsx
-│   ├── budgets/                 # Suivi des budgets
-│   │   ├── page.tsx
-│   │   └── loading.tsx
-│   ├── forecasting/             # Prévisions financières
-│   │   ├── page.tsx
-│   │   └── loading.tsx
-│   ├── import/                  # Import de données
-│   │   └── page.tsx
-│   └── globals.css              # Styles globaux et tokens design
-├── components/                   # Composants réutilisables
-│   ├── ui/                      # Composants UI de base (shadcn)
-│   ├── lock-screen.tsx          # Écran de verrouillage sécurisé
-│   ├── sidebar-navigation.tsx   # Navigation latérale
-│   ├── chart-line.tsx           # Graphiques en ligne
-│   ├── candlestick-chart.tsx    # Graphiques OHLC
-│   ├── calendar-heatmap.tsx     # Heatmap calendaire
-│   ├── financial-indicators.tsx # Indicateurs financiers
-│   └── theme-provider.tsx       # Gestion des thèmes
-├── hooks/                       # Hooks React personnalisés
-│   ├── use-mobile.tsx           # Détection mobile
-│   └── use-toast.ts             # Système de notifications
-├── lib/                         # Utilitaires et helpers
-│   └── utils.ts                 # Fonctions utilitaires
-├── types/                       # Définitions TypeScript
-│   └── financial.ts             # Types pour les données financières
-├── src-tauri/                    # Backend Rust avec Tauri
-│   ├── Cargo.toml               # Configuration du projet Rust
-│   ├── src/                     # Code source backend
-│   └── tauri.conf.json          # Configuration Tauri
-└── assets/                       # Fichiers statiques
-    └── icons/                   # Icônes utilisées
-\`\`\`
-
-## 🚀 Installation et Configuration
-
-### Prérequis
-- **Rust** 1.70+ avec Cargo
-- **Node.js** 18+ 
-- **pnpm** (recommandé) ou npm/yarn
-- **Tauri CLI** : `cargo install tauri-cli`
-
-### Installation
-
-1. **Cloner le repository**
-\`\`\`bash
-git clone https://github.com/votre-username/finance-app.git
-cd finance-app
-\`\`\`
-
-2. **Installer les dépendances**
-\`\`\`bash
-# Frontend React
-pnpm install
-
-# Backend Rust (automatique avec Tauri)
-cargo install tauri-cli
-\`\`\`
-
-3. **Développement**
-\`\`\`bash
-# Lancer en mode développement
-pnpm tauri dev
-\`\`\`
-
-4. **Build de production**
-\`\`\`bash
-# Compiler l'application desktop
-pnpm tauri build
-\`\`\`
-
-### Build Tauri
-L'application sera compilée dans `src-tauri/target/release/` :
-- **Windows** : `.exe` et installateur `.msi`
-- **macOS** : `.app` et `.dmg`
-- **Linux** : `.AppImage` et `.deb`
-
-### Configuration Initiale
-
-1. **Premier lancement** : Définissez votre mot de passe maître pour le coffre-fort
-2. **Initialisation du coffre** : La base SQLite chiffrée est créée automatiquement
-3. **Import de données** : Importez vos relevés bancaires via la page Import
-4. **Configuration des budgets** : Définissez vos limites mensuelles par catégorie
-
-## 📖 Guide d'Utilisation
-
-### Écran de Verrouillage
-- L'application se verrouille automatiquement après 15 minutes d'inactivité
-- Utilisez votre mot de passe maître pour déverrouiller
-- Option "Se souvenir de moi" pour éviter les verrouillages fréquents
-
-### Tableau de Bord
-- **Vue d'ensemble** : Métriques clés en un coup d'œil
-- **Graphiques interactifs** : Cliquez et explorez vos données
-- **Indicateurs avancés** : Surveillez votre santé financière
-- **Transactions récentes** : Accès rapide aux dernières opérations
-
-### Gestion des Transactions
-- **Ajout manuel** : Bouton "+" pour ajouter une transaction
-- **Modification** : Clic sur une transaction pour l'éditer
-- **Filtres** : Utilisez les filtres pour analyser des périodes spécifiques
-- **Export** : Exportez vos données au format CSV
-
-### Budgets
-- **Création** : Définissez des budgets mensuels par catégorie
-- **Suivi** : Barres de progression en temps réel
-- **Alertes** : Notifications automatiques en cas de dépassement
-- **Historique** : Consultez l'évolution de vos budgets
-
-### Prévisions
-- **Modèles** : Choisissez entre différents algorithmes de prévision
-- **Scénarios** : Explorez différentes hypothèses d'évolution
-- **Planification** : Anticipez vos besoins financiers futurs
-
-## 🔧 Personnalisation
-
-### Thèmes
-L'application supporte les modes clair et sombre avec basculement automatique selon les préférences système.
-
-### Catégories
-Personnalisez les catégories de transactions selon vos habitudes :
-- Alimentation, Transport, Logement, Loisirs, etc.
-- Couleurs personnalisables pour chaque catégorie
-- Icônes associées pour une meilleure lisibilité
-
-### Indicateurs
-Configurez les seuils d'alerte pour :
-- ITT (Indice de Tension de Trésorerie)
-- Burn rate quotidien
-- Runway (autonomie financière)
-- Volatilité acceptable
-
-## 🔒 Sécurité et Confidentialité
-
-### Architecture de Sécurité Bancaire
-- **Coffre-fort chiffré** : Base de données SQLite protégée par SQLCipher
-- **Chiffrement AES-256-GCM** : Standard bancaire pour la protection des données
-- **Dérivation de clé PBKDF2** : 200 000 itérations pour résister aux attaques par force brute
-- **Clé maître** : Dérivée de votre mot de passe, jamais stockée en clair
-- **Verrouillage automatique** : Coffre verrouillé après 15 minutes d'inactivité
-
-### Protection des Données
-- **100% offline** : Aucune connexion réseau, toutes les données restent locales
-- **Isolation Tauri** : Sandbox sécurisé entre frontend et backend
-- **Pas de télémétrie** : Aucun suivi, tracking ou envoi de données
-- **Code auditable** : Architecture transparente et vérifiable
-- **Sauvegarde chiffrée** : Export/import du coffre avec protection par mot de passe
-
-### Bonnes Pratiques
-- Utilisez un mot de passe maître fort (12+ caractères, mixte)
-- Sauvegardez régulièrement votre coffre chiffré
-- Maintenez l'application à jour pour les correctifs de sécurité
-- Évitez l'utilisation sur des systèmes compromis
-
-## 🤝 Contribution
-
-### Développement Local
-1. Fork le repository
-2. Installez Rust et Node.js
-3. Créez une branche feature (`git checkout -b feature/nouvelle-fonctionnalite`)
-4. Développez avec `pnpm tauri dev`
-5. Testez avec `cargo test` et `pnpm test`
-6. Committez vos changements (`git commit -am 'Ajout nouvelle fonctionnalité'`)
-7. Push vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
-8. Créez une Pull Request
-
-### Standards de Code
-- **Rust** : Suivre les conventions Rust avec `cargo fmt` et `cargo clippy`
-- **TypeScript strict** : Tous les types doivent être définis
-- **ESLint** : Le code doit passer tous les tests de linting
-- **Tests** : Ajoutez des tests unitaires pour Rust et React
-- **Sécurité** : Audit de sécurité obligatoire pour les changements critiques
-
-## 📞 Support
-
-Pour toute question ou assistance :
-- 🐛 Issues : [GitHub Issues](https://github.com/votre-username/finance-app/issues)
-- 📖 Documentation : Consultez le code source et les commentaires
-- 🔒 Sécurité : Rapportez les vulnérabilités via security@finance-app.com
+Modern, secure, and local-first desktop application to analyze and manage your personal finances. Built with React, TypeScript, Next.js, and Tauri, this application helps you visualize, forecast and control your budgets – 100% private, your data never leaves your machine!  
 
 ---
 
-**Application desktop développée avec ❤️ pour une gestion financière personnelle moderne, sécurisée et 100% privée**
+## 📚 Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage Guide](#usage-guide)
+- [Security](#security)
+- [Customization](#customization)
+- [Contributing](#contributing)
+- [Support](#support)
+
+---
+
+## 🌟 Features
+
+### 📊 Advanced Dashboard
+- Sophisticated financial indicators: ITT (Cash Flow Index), burn rate, runway, volatility, drawdown
+- OHLC candlestick charts: Japanese-style with volumes
+- Calendar heatmaps: yearly spend patterns
+- Real-time metrics: balance, income, expenses, savings with trend monitoring
+
+### 💳 Transaction Management
+- Intuitive CRUD: add, edit, delete transactions
+- Advanced filters: date, amount, category, account
+- Smart search: free-text search in descriptions
+- Automatic categorization: intelligent classification
+- Visual cues: color-coded incomes/expenses
+
+### 📈 Budgets & Tracking
+- Custom monthly budgets by category
+- Progress bars with overrun alerts
+- Comparative analysis: budget vs. actual
+- Intelligent notifications: configurable thresholds
+
+### 🔮 Forecasting
+- Predictive analytics: historical algorithms
+- Scenario modeling: optimistic, pessimistic, realistic
+- Trend detection: identify spending patterns
+- Long-term planning: 6-12 month projections
+
+### 📥 Data Import
+- Multiple formats: CSV, OFX, QIF, MT940
+- Intuitive drag & drop UI
+- Duplicate detection, robust data validation
+
+### 🔒 Security & Privacy
+- Lock screen: password at startup
+- Auto-lock after inactivity
+- Local storage only: no server or cloud
+- Encryption: all sensitive data protected
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18+, Next.js 14+, TypeScript, Tailwind CSS v4, [Shadcn/ui](https://ui.shadcn.com/), [Lucide React](https://lucide.dev/)
+- **Backend**: [Tauri](https://tauri.app/) (Rust), SQLite local DB (encrypted with SQLCipher)
+- **Visualization**: [Apache ECharts](https://echarts.apache.org/), [Recharts](https://recharts.org/en-US/)
+- **Tooling**: ESLint, Prettier, Cargo, strict TypeScript, pnpm
+- **Other**: [Radix UI primitives](https://www.radix-ui.com/), [date-fns](https://date-fns.org/)
+
+---
+
+## 📁 Project Structure
+
+```text
+├── app/                # Pages & routes (App Router)
+│   ├── layout.tsx
+│   ├── client-layout.tsx
+│   ├── page.tsx
+│   ├── transactions/
+│   │   ├── page.tsx
+│   │   └── loading.tsx
+│   ├── budgets/
+│   │   ├── page.tsx
+│   │   └── loading.tsx
+│   ├── forecasting/
+│   │   ├── page.tsx
+│   │   └── loading.tsx
+│   ├── import/
+│   │   └── page.tsx
+│   └── globals.css
+├── components/         # Reusable React components
+│   ├── ui/
+│   ├── lock-screen.tsx
+│   ├── sidebar-navigation.tsx
+│   ├── chart-line.tsx
+│   ├── candlestick-chart.tsx
+│   ├── calendar-heatmap.tsx
+│   ├── financial-indicators.tsx
+│   └── theme-provider.tsx
+├── hooks/              # Custom React hooks
+│   ├── use-mobile.tsx
+│   └── use-toast.ts
+├── lib/                # Utilities & helpers
+│   └── utils.ts
+├── types/              # TypeScript types
+│   └── financial.ts
+├── src-tauri/          # Tauri (Rust backend)
+│   ├── Cargo.toml
+│   ├── src/
+│   └── tauri.conf.json
+└── assets/
+    └── icons/
+```
+
+---
+
+## 🚀 Installation
+
+### 1. Pre-requisites
+
+- **Rust** 1.70+ (with Cargo)
+- **Node.js** 18+
+- **pnpm** (or npm/yarn)
+- **Tauri CLI**:  
+  ```sh
+  cargo install tauri-cli
+  ```
+
+### 2. Setup
+
+```sh
+# Clone the repository
+git clone https://github.com/Giscolab/v0-personal-finance-app.git
+cd v0-personal-finance-app
+
+# Install frontend dependencies
+pnpm install
+
+# (Optional) Install Tauri CLI if not done above
+cargo install tauri-cli
+```
+
+### 3. Development
+
+```sh
+# Launch the app in dev mode (Next.js + Tauri)
+pnpm tauri dev
+```
+
+### 4. Production Build
+
+```sh
+pnpm tauri build
+# Artifacts found in src-tauri/target/release/
+```
+
+#### For Windows: `.exe` and `.msi`  
+#### For macOS: `.app` and `.dmg`  
+#### For Linux: `.AppImage` and `.deb`
+
+---
+
+## 📖 Usage Guide
+
+### Lock Screen
+- App auto-locks after 15 min inactivity
+- Use master password to unlock
+- "Remember me" option available
+
+### Dashboard
+- Key metrics at a glance
+- Interactive charts & indicators
+- Recent transactions overview
+
+### Transaction Management
+- Manual add (+), edit, and filter actions
+- Export to CSV
+
+### Budgets
+- Create/check monthly budgets
+- Real-time progress and alerts
+- Budget history
+
+### Forecasting
+- Switch between predictive algorithms & scenarios
+- Plan future needs
+
+---
+
+## 🔧 Customization
+
+- **Themes**: Light/dark based on system preference
+- **Categories**: Create/customize your own categories and colors
+- **Indicators**: Set threshold levels for alerts (e.g. ITT, burn rate, volatility)
+
+---
+
+## 🔒 Security
+
+### Architecture
+
+- **Encrypted vault**: SQLCipher (AES-256-GCM)
+- **Key derivation**: PBKDF2, 200k iterations
+- **Master key**: Derived (never stored in clear)
+- **Full offline**: No network, local-only
+- **Sandboxing**:  Tauri isolation between frontend & backend
+- **No telemetry**: No tracking or analytics
+
+### Recommendations
+
+- Use a strong master password (≥12 chars)
+- Back up your encrypted vault regularly
+- Keep the app updated for security fixes
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Install Rust & Node.js
+3. Create a feature branch  
+   ```sh
+   git checkout -b feature/awesome-feature
+   ```
+4. Dev: `pnpm tauri dev`
+5. Test: `cargo test`, `pnpm test`
+6. Commit & push  
+   ```sh
+   git commit -am "Add awesome feature"
+   git push origin feature/awesome-feature
+   ```
+7. Open a Pull Request
+
+**Code style:**  
+- Rust: `cargo fmt`, `cargo clippy`  
+- TypeScript: strict types everywhere  
+- ESLint must pass  
+- Add unit tests (both Rust + React)  
+- Security review on critical changes
+
+---
+
+## 📞 Support
+
+- 💬 Issues: [GitHub Issues](https://github.com/Giscolab/v0-personal-finance-app/issues)
+- 📖 Docs: browse code & comments
+- 🔒 Security: report vulnerabilities to security@finance-app.com
+
+---
+
+**Made with ❤️ for modern, secure & private finance management.**
